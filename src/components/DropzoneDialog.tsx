@@ -70,6 +70,7 @@ class DropzoneDialog extends PureComponent<
     clearOnUnmount: true,
     filesLimit: 3,
     initialFiles: [],
+    useCors: false,
   };
 
   state: DropzoneDialogState = {
@@ -105,7 +106,10 @@ class DropzoneDialog extends PureComponent<
         initialFiles.map(async (initialFile) => {
           let file;
           if (typeof initialFile === "string") {
-            file = await createFileFromUrl(initialFile);
+            file = await createFileFromUrl(
+              initialFile,
+              DropzoneDialog.defaultProps.useCors
+            );
           } else {
             file = initialFile;
           }

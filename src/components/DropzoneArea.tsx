@@ -81,6 +81,7 @@ class DropzoneArea extends PureComponent<DropzoneAreaProps, DropzoneAreaState> {
     clearOnUnmount: true,
     filesLimit: 3,
     initialFiles: [] as NonNullable<DropzoneAreaProps["initialFiles"]>,
+    useCors: false,
   };
 
   state: DropzoneAreaState = {
@@ -117,7 +118,10 @@ class DropzoneArea extends PureComponent<DropzoneAreaProps, DropzoneAreaState> {
         initialFiles.map(async (initialFile) => {
           let file;
           if (typeof initialFile === "string") {
-            file = await createFileFromUrl(initialFile);
+            file = await createFileFromUrl(
+              initialFile,
+              DropzoneArea.defaultProps.useCors
+            );
           } else {
             file = initialFile;
           }

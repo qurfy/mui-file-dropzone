@@ -40,6 +40,10 @@ export type DropzoneAreaProps = Omit<
    */
   initialFiles?: (File | string)[];
   /**
+   * setting this to true will send Origin header while fetching initialFiles forcing to use Cors
+   */
+  useCors: boolean;
+  /**
    * Fired when the files inside dropzone change.
    *
    * @param {File[]} loadedFiles All the files currently loaded into the dropzone.
@@ -72,6 +76,7 @@ class DropzoneArea extends PureComponent<DropzoneAreaProps, DropzoneAreaState> {
     initialFiles: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.string, PropTypes.any])
     ),
+    useCors: PropTypes.bool,
     filesLimit: PropTypes.number,
     onChange: PropTypes.func,
     onDelete: PropTypes.func,
@@ -113,15 +118,14 @@ class DropzoneArea extends PureComponent<DropzoneAreaProps, DropzoneAreaState> {
     const { initialFiles = DropzoneArea.defaultProps.initialFiles } =
       this.props;
 
+    const { useCors = DropzoneArea.defaultProps.useCors } = this.props;
+
     try {
       const fileObjs = await Promise.all(
         initialFiles.map(async (initialFile) => {
           let file;
           if (typeof initialFile === "string") {
-            file = await createFileFromUrl(
-              initialFile,
-              DropzoneArea.defaultProps.useCors
-            );
+            file = await createFileFromUrl(initialFile, useCors);
           } else {
             file = initialFile;
           }

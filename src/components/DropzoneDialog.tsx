@@ -21,6 +21,10 @@ export type DropzoneDialogProps = Omit<
    */
   initialFiles?: (File | string)[];
   /**
+   * setting this to true will send Origin header while fetching initialFiles forcing to use Cors
+   */
+  useCors: boolean;
+  /**
    * Fired when the files inside dropzone change.
    *
    * @param {File[]} loadedFiles All the files currently loaded into the dropzone.
@@ -63,6 +67,7 @@ class DropzoneDialog extends PureComponent<
     initialFiles: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.string, PropTypes.any])
     ),
+    useCors: PropTypes.bool,
     onSave: PropTypes.func,
   };
 
@@ -101,15 +106,13 @@ class DropzoneDialog extends PureComponent<
   loadInitialFiles = async () => {
     const { initialFiles = DropzoneDialog.defaultProps.initialFiles } =
       this.props;
+    const { useCors = DropzoneDialog.defaultProps.useCors } = this.props;
     try {
       const fileObjs = await Promise.all(
         initialFiles.map(async (initialFile) => {
           let file;
           if (typeof initialFile === "string") {
-            file = await createFileFromUrl(
-              initialFile,
-              DropzoneDialog.defaultProps.useCors
-            );
+            file = await createFileFromUrl(initialFile, useCors);
           } else {
             file = initialFile;
           }

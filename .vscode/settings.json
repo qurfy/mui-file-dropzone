@@ -11,8 +11,13 @@
     "typescript",
     "typescriptreact"
   ],
+  "files.exclude": {
+    "**/.history": true,
+    "node_modules/": true,
+    "dist/": true
+  },
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,

@@ -1,7 +1,7 @@
 import { SvgIconComponent } from "@mui/icons-material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { Box, Theme } from "@mui/material";
+import { Box, Stack, Theme } from "@mui/material";
 import { BoxProps } from "@mui/material/Box";
 import { ChipProps } from "@mui/material/Chip";
 import { GridProps } from "@mui/material/Grid";
@@ -99,6 +99,8 @@ export type DropzoneAreaBaseProps = {
   maxFileSize?: number;
   /** Text inside the dropzone. */
   dropzoneText?: string;
+  /** Mandatory asterisk */
+  required?: boolean;
   /** The label for the file preview section. */
   previewText?: string;
   /** Shows previews **BELOW** the dropzone. */
@@ -577,6 +579,7 @@ class DropzoneAreaBase extends PureComponent<
       dropzoneParagraphClass,
       dropzoneProps,
       dropzoneText,
+      required,
       fileObjects,
       filesLimit = DropzoneAreaBase.defaultProps.filesLimit,
       getPreviewIcon = DropzoneAreaBase.defaultProps.getPreviewIcon,
@@ -640,14 +643,21 @@ class DropzoneAreaBase extends PureComponent<
                   sx={this.defaultSx.textContainer}
                   className={classes.textContainer}
                 >
-                  <Typography
-                    variant="h5"
-                    component="p"
-                    sx={this.defaultSx.text}
-                    className={clsx(classes.text, dropzoneParagraphClass)}
-                  >
-                    {dropzoneText}
-                  </Typography>
+                  <Stack direction={"row"} spacing={1}>
+                    <Typography
+                      variant="h5"
+                      component="p"
+                      sx={this.defaultSx.text}
+                      className={clsx(classes.text, dropzoneParagraphClass)}
+                    >
+                      {dropzoneText}
+                    </Typography>
+                    {required === true ? (
+                      <Typography variant="h5" color={"red"}>
+                        *
+                      </Typography>
+                    ) : null}
+                  </Stack>
                   {Icon ? (
                     <Icon sx={this.defaultSx.icon} className={classes.icon} />
                   ) : (

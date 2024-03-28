@@ -653,7 +653,12 @@ class DropzoneAreaBase extends PureComponent<
                       {dropzoneText}
                     </Typography>
                     {required === true ? (
-                      <Typography variant="h5" color={"red"}>
+                      <Typography
+                        component="p"
+                        variant="h5"
+                        color={"red"}
+                        alignContent={"center"}
+                      >
                         *
                       </Typography>
                     ) : null}

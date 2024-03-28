@@ -202,7 +202,7 @@ class DropzoneAreaBase extends react_1.PureComponent {
                     react_1.default.createElement(material_1.Box, { sx: this.defaultSx.textContainer, className: classes.textContainer },
                         react_1.default.createElement(material_1.Stack, { direction: "row", spacing: 1 },
                             react_1.default.createElement(Typography_1.default, { variant: "h5", component: "p", sx: this.defaultSx.text, className: (0, clsx_1.default)(classes.text, dropzoneParagraphClass) }, dropzoneText),
-                            required === true ? (react_1.default.createElement(Typography_1.default, { variant: "h5", color: "red" }, "*")) : null),
+                            required === true ? (react_1.default.createElement(Typography_1.default, { component: "p", variant: "h5", color: "red", alignContent: "center" }, "*")) : null),
                         Icon ? (react_1.default.createElement(Icon, { sx: this.defaultSx.icon, className: classes.icon })) : (react_1.default.createElement(CloudUpload_1.default, { sx: this.defaultSx.icon, className: classes.icon }))),
                     previewsInDropzoneVisible ? (react_1.default.createElement(PreviewList_1.default, { fileObjects: fileObjects, handleRemove: this.handleRemove, getPreviewIcon: getPreviewIcon, showFileNames: showFileNames, useChipsForPreview: useChipsForPreview, previewChipProps: previewChipProps, previewGridClasses: previewGridClasses, previewGridProps: previewGridProps })) : null));
             }),

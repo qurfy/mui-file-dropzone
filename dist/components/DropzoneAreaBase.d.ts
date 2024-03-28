@@ -42,6 +42,8 @@ export declare type DropzoneAreaBaseProps = {
     maxFileSize?: number;
     /** Text inside the dropzone. */
     dropzoneText?: string;
+    /** Mandatory asterisk */
+    required?: boolean;
     /** The label for the file preview section. */
     previewText?: string;
     /** Shows previews **BELOW** the dropzone. */
@@ -199,17 +201,29 @@ export declare type DropzoneAreaBaseProps = {
     getPreviewIcon?: PreviewListProps["getPreviewIcon"];
 };
 declare const ThemedDropzoneAreaBase: React.ForwardRefExoticComponent<{
-    fileObjects: FileObject[];
-    onAdd?: ((newFiles: FileObject[]) => void) | undefined;
-    onDelete?: ((deletedFileObject: FileObject, index: number) => void) | undefined;
+    getPreviewIcon?: ((fileObject: FileObject, classes: {
+        image?: string | undefined;
+        imageContainer?: string | undefined;
+        removeButton?: string | undefined;
+        root?: string | undefined;
+    } | undefined) => JSX.Element) | undefined;
     classes?: Partial<DropzoneAreaBaseClasses> | undefined;
+    onDelete?: ((deletedFileObject: FileObject, index: number) => void) | undefined;
+    onDrop?: ((droppedFiles: File[], event: DropEvent) => void) | undefined;
+    getFileLimitExceedMessage?: ((filesLimit: number) => string) | undefined;
+    getFileAddedMessage?: ((fileName: string) => string) | undefined;
+    getFileRemovedMessage?: ((fileName: string) => string) | undefined;
+    getDropRejectMessage?: ((rejectedFile: File, acceptedFiles: string[], maxFileSize: number) => string) | undefined;
+    onAlert?: ((message: string, variant: AlertType) => void) | undefined;
     acceptedFiles?: string[] | undefined;
     filesLimit?: number | undefined;
+    fileObjects: FileObject[];
     Icon?: (import("@mui/material/OverridableComponent").OverridableComponent<import("@mui/material").SvgIconTypeMap<{}, "svg">> & {
         muiName: string;
     }) | undefined;
     maxFileSize?: number | undefined;
     dropzoneText?: string | undefined;
+    required?: boolean | undefined;
     previewText?: string | undefined;
     showPreviews?: boolean | undefined;
     showPreviewsInDropzone?: boolean | undefined;
@@ -234,19 +248,8 @@ declare const ThemedDropzoneAreaBase: React.ForwardRefExoticComponent<{
     dropzoneClass?: string | undefined;
     dropzoneParagraphClass?: string | undefined;
     disableRejectionFeedback?: boolean | undefined;
-    onDrop?: ((droppedFiles: File[], event: DropEvent) => void) | undefined;
+    onAdd?: ((newFiles: FileObject[]) => void) | undefined;
     onDropRejected?: ((rejectedFiles: File[], event: DropEvent) => void) | undefined;
-    onAlert?: ((message: string, variant: AlertType) => void) | undefined;
-    getFileLimitExceedMessage?: ((filesLimit: number) => string) | undefined;
-    getFileAddedMessage?: ((fileName: string) => string) | undefined;
-    getFileRemovedMessage?: ((fileName: string) => string) | undefined;
-    getDropRejectMessage?: ((rejectedFile: File, acceptedFiles: string[], maxFileSize: number) => string) | undefined;
-    getPreviewIcon?: ((fileObject: FileObject, classes: {
-        image?: string | undefined;
-        imageContainer?: string | undefined;
-        removeButton?: string | undefined;
-        root?: string | undefined;
-    } | undefined) => JSX.Element) | undefined;
 } & React.RefAttributes<unknown>>;
 export default ThemedDropzoneAreaBase;
 //# sourceMappingURL=DropzoneAreaBase.d.ts.map

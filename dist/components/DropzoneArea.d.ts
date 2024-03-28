@@ -45,15 +45,27 @@ declare class DropzoneArea extends PureComponent<DropzoneAreaProps, DropzoneArea
         filesLimit: PropTypes.Requireable<number>;
         onChange: PropTypes.Requireable<(...args: any[]) => any>;
         onDelete: PropTypes.Requireable<(...args: any[]) => any>;
-        fileObjects?: React.Validator<FileObject[]> | undefined;
-        onAdd?: React.Validator<((newFiles: FileObject[]) => void) | null | undefined> | undefined;
+        getPreviewIcon?: React.Validator<((fileObject: FileObject, classes: {
+            image?: string | undefined;
+            imageContainer?: string | undefined;
+            removeButton?: string | undefined;
+            root?: string | undefined;
+        } | undefined) => JSX.Element) | null | undefined> | undefined;
         classes?: React.Validator<Partial<import("./DropzoneAreaBase").DropzoneAreaBaseClasses> | null | undefined> | undefined;
+        onDrop?: React.Validator<((droppedFiles: File[], event: import("react-dropzone").DropEvent) => void) | null | undefined> | undefined;
+        getFileLimitExceedMessage?: React.Validator<((filesLimit: number) => string) | null | undefined> | undefined;
+        getFileAddedMessage?: React.Validator<((fileName: string) => string) | null | undefined> | undefined;
+        getFileRemovedMessage?: React.Validator<((fileName: string) => string) | null | undefined> | undefined;
+        getDropRejectMessage?: React.Validator<((rejectedFile: File, acceptedFiles: string[], maxFileSize: number) => string) | null | undefined> | undefined;
+        onAlert?: React.Validator<((message: string, variant: import("../types").AlertType) => void) | null | undefined> | undefined;
         acceptedFiles?: React.Validator<string[] | null | undefined> | undefined;
+        fileObjects?: React.Validator<FileObject[]> | undefined;
         Icon?: React.Validator<(import("@mui/material/OverridableComponent").OverridableComponent<import("@mui/material").SvgIconTypeMap<{}, "svg">> & {
             muiName: string;
         }) | null | undefined> | undefined;
         maxFileSize?: React.Validator<number | null | undefined> | undefined;
         dropzoneText?: React.Validator<string | null | undefined> | undefined;
+        required?: React.Validator<boolean | null | undefined> | undefined;
         previewText?: React.Validator<string | null | undefined> | undefined;
         showPreviews?: React.Validator<boolean | null | undefined> | undefined;
         showPreviewsInDropzone?: React.Validator<boolean | null | undefined> | undefined;
@@ -77,19 +89,8 @@ declare class DropzoneArea extends PureComponent<DropzoneAreaProps, DropzoneArea
         dropzoneClass?: React.Validator<string | null | undefined> | undefined;
         dropzoneParagraphClass?: React.Validator<string | null | undefined> | undefined;
         disableRejectionFeedback?: React.Validator<boolean | null | undefined> | undefined;
-        onDrop?: React.Validator<((droppedFiles: File[], event: import("react-dropzone").DropEvent) => void) | null | undefined> | undefined;
+        onAdd?: React.Validator<((newFiles: FileObject[]) => void) | null | undefined> | undefined;
         onDropRejected?: React.Validator<((rejectedFiles: File[], event: import("react-dropzone").DropEvent) => void) | null | undefined> | undefined;
-        onAlert?: React.Validator<((message: string, variant: import("../types").AlertType) => void) | null | undefined> | undefined;
-        getFileLimitExceedMessage?: React.Validator<((filesLimit: number) => string) | null | undefined> | undefined;
-        getFileAddedMessage?: React.Validator<((fileName: string) => string) | null | undefined> | undefined;
-        getFileRemovedMessage?: React.Validator<((fileName: string) => string) | null | undefined> | undefined;
-        getDropRejectMessage?: React.Validator<((rejectedFile: File, acceptedFiles: string[], maxFileSize: number) => string) | null | undefined> | undefined;
-        getPreviewIcon?: React.Validator<((fileObject: FileObject, classes: {
-            image?: string | undefined;
-            imageContainer?: string | undefined;
-            removeButton?: string | undefined;
-            root?: string | undefined;
-        } | undefined) => JSX.Element) | null | undefined> | undefined;
         ref?: React.Validator<React.Ref<unknown> | undefined> | undefined;
         key?: React.Validator<React.Key | null | undefined> | undefined;
     };
